@@ -1,12 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { getListFilms } from "../../redux/thunk";
 
 const SearchPage: React.FC = () => {
+  const dispatch = useDispatch()
   function useDebouncedFunction(delay: number) {
     let timeoutId: any;
 
     return (valueText: string) => {
       clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => console.log(valueText), delay);
+      timeoutId = setTimeout(() => dispatch(getListFilms(valueText)), delay);
     };
   }
   const debouncedValueLogging = useDebouncedFunction(1000);
